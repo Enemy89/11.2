@@ -35,9 +35,9 @@ string mirror_line(string line) {
 
 string before_symbol (string str) {
     string result;
-    string checkStr = "'-.!#$%&*+-/=?^_`{|}~QWERTYUIOPASDFGHJKLZXCVBNMqwertyuiopasdfghjklzxcvbnm1234567890"; //как ввести символ "\"
-    int checkGood, checkBad = 0;
-    if (str.length() < 1 && str.length() > 64) {
+    string checkStr = "'.!#$%&*+-/=?^_`{|}~QWERTYUIOPASDFGHJKLZXCVBNMqwertyuiopasdfghjklzxcvbnm1234567890"; //как ввести символ "\"
+    int checkGood=0, checkBad = 0;
+    if (str.length() < 1 || str.length() > 64) {
         result = "No";
         return result;
     } else {
@@ -57,21 +57,15 @@ string before_symbol (string str) {
     }
 }
 
-int main() {
-    int count=0;
-    cout << "Enter email: " << endl;
-    getline(cin, email);
-    for (int i=0; i<email.length(); i++) {
-        if (email[i] == '@') {
-            count++;
-        }
-    }
-    string str= first_part_address(email);
+string after_symbol(string str) {
     string result;
-    string checkStr = "'-.!#$%&*+-/=?^_`{|}~QWERTYUIOPASDFGHJKLZXCVBNMqwertyuiopasdfghjklzxcvbnm1234567890"; //как ввести символ "\"
-    int checkGood, checkBad = 0;
-    if (str.length() > 0 && str.length() < 65) {
-        for (int i = 0; i < str.length(); i++) {
+    string checkStr = "-.QWERTYUIOPASDFGHJKLZXCVBNMqwertyuiopasdfghjklzxcvbnm1234567890"; //как ввести символ "\"
+    int checkGood = 0, checkBad = 0;
+    if (str.length() < 1 || str.length() > 63) {
+        result = "No";
+        return result;
+    } else {
+        for (int i = 1; i < str.length(); i++) {
             for (int j = 0; j < checkStr.length(); j++) {
                 if (str[i] == checkStr[j]) {
                     checkGood++;
@@ -83,15 +77,19 @@ int main() {
                 checkBad++;
             }
         }
-    } else {
-        result = "No";
+        return (checkGood == str.length()-1 && checkBad == 0 ? "Yes" : "No");
     }
-    if (checkGood == str.length() && checkBad == 0) {
-        result = "Yes";
-    } else {
-        result = "No";
+}
+
+int main() {
+    int count=0;
+    cout << "Enter email: " << endl;
+    getline(cin, email);
+    for (int i=0; i<email.length(); i++) {
+        if (email[i] == '@') {
+            count++;
+        }
     }
-    cout<<checkGood<<endl<<str.length()<<endl<<checkBad<<endl<<result;
- //  cout<<first_part_address(email)<<endl;
-  // cout<<(count!=1 ? "No email-address!" : before_symbol(first_part_address(email)));
+   cout<<(count!=1 ? "No email-address!" : (before_symbol(first_part_address(email))=="Yes" && after_symbol(mirror_line(
+           second_part_address(email)))=="Yes" ? "Yes" : "No") );
 }
