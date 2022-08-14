@@ -35,7 +35,7 @@ string mirror_line(string line) {
 
 string before_symbol (string str) {
     string result;
-    string checkStr = "'.!#$%&*+-/=?^_`{|}~QWERTYUIOPASDFGHJKLZXCVBNMqwertyuiopasdfghjklzxcvbnm1234567890"; //как ввести символ "\"
+    string checkStr = "'.!#$%&*+-/=?^_`{|}~QWERTYUIOPASDFGHJKLZXCVBNMqwertyuiopasdfghjklzxcvbnm1234567890'\\'";
     int checkGood=0, checkBad = 0;
     if (str.length() < 1 || str.length() > 64) {
         result = "No";
@@ -59,7 +59,7 @@ string before_symbol (string str) {
 
 string after_symbol(string str) {
     string result;
-    string checkStr = "-.QWERTYUIOPASDFGHJKLZXCVBNMqwertyuiopasdfghjklzxcvbnm1234567890"; //как ввести символ "\"
+    string checkStr = "-.QWERTYUIOPASDFGHJKLZXCVBNMqwertyuiopasdfghjklzxcvbnm1234567890";
     int checkGood = 0, checkBad = 0;
     if (str.length() < 1 || str.length() > 63) {
         result = "No";
